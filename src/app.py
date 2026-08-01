@@ -37,10 +37,13 @@ def load_data() -> tuple[pd.DataFrame, pd.DataFrame, list[str], list[str], list[
     district_set = set()
     block_set = set()
     gp_id_set = set()
+for folder in year_folders:
+    print("Folder:", folder)
+    print("Exists:", folder.exists())
+    print("Files:", list(folder.glob("*.xlsx")))
 
-    for folder in year_folders:
-        if not folder.exists():
-            continue
+    if not folder.exists():
+        continue
         for file in sorted(folder.glob("*.xlsx")):
             if file.name.startswith("~$"):
                 continue
