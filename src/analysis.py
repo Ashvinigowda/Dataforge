@@ -5,13 +5,17 @@ import openpyxl
 import pandas as pd
 import seaborn as sns
 
-
-BASE_DIR = Path.cwd()
-OUTPUT_DIR = BASE_DIR / "analysis_output"
-OUTPUT_DIR.mkdir(exist_ok=True)
+REPO_ROOT = Path(__file__).resolve().parent.parent
+DATA_DIR = REPO_ROOT / "data"
+OUTPUT_DIR = REPO_ROOT / "outputs" / "figures"
+OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
 
 score_columns = [f"Q{i}" for i in range(1, 21)]
-year_folders = [BASE_DIR / "2022_23", BASE_DIR / "2023_24", BASE_DIR / "2024_25"]
+year_folders = [
+    DATA_DIR / "2022_23",
+    DATA_DIR / "2023_24",
+    DATA_DIR / "2024_25",
+]
 
 
 def load_sheet_as_dataframe(file_path: Path) -> pd.DataFrame:
