@@ -19,3 +19,6 @@ renv/library/
 # student assessment records. Keep all provided and derived data under data/.
 data/*
 !data/README.md
+2022_23/
+2023_24/
+2024_25/
