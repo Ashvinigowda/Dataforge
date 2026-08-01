@@ -12,7 +12,8 @@ from sklearn.metrics import accuracy_score, mean_absolute_error
 from sklearn.model_selection import train_test_split
 
 
-BASE_DIR = Path(__file__).resolve().parent
+REPO_ROOT = Path(__file__).resolve().parent.parent
+DATA_DIR = REPO_ROOT / "data"
 score_columns = [f"Q{i}" for i in range(1, 21)]
 competency_map = {
     "Conceptual Clarity": [f"Q{i}" for i in range(1, 6)],
@@ -24,7 +25,11 @@ competency_map = {
 
 @st.cache_data
 def load_data() -> tuple[pd.DataFrame, pd.DataFrame, list[str], list[str], list[str], list[str], list[str]]:
-    year_folders = [BASE_DIR / "2022_23", BASE_DIR / "2023_24", BASE_DIR / "2024_25"]
+    year_folders = [
+    DATA_DIR / "2022_23",
+    DATA_DIR / "2023_24",
+    DATA_DIR / "2024_25",
+]
     summary_rows = []
     geo_rows = []
     year_set = set()
@@ -119,7 +124,11 @@ def load_data() -> tuple[pd.DataFrame, pd.DataFrame, list[str], list[str], list[
 @st.cache_data
 def build_sampled_model_data() -> pd.DataFrame:
     sample_rows = []
-    for folder in [BASE_DIR / "2022_23", BASE_DIR / "2023_24", BASE_DIR / "2024_25"]:
+    for folder in [
+    DATA_DIR / "2022_23",
+    DATA_DIR / "2023_24",
+    DATA_DIR / "2024_25",
+]:
         if not folder.exists():
             continue
         for file in sorted(folder.glob("*.xlsx")):
